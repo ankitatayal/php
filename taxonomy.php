@@ -12,6 +12,7 @@ $dbhost = 'localhost';
 mysql_select_db('db_event');
    ?>
    <?php
+   $x=$_SESSION['role_id'];
 $sql1= "SELECT * FROM taxonomy";
 $retval=mysql_query($sql1,$conn);
  echo '<form method = "post" action ="taxonomy.php">';

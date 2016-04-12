@@ -57,6 +57,9 @@
        color: white;
        float: right;
     }
+    #add{
+      margin-top: 50%;
+    }
 
       </style>
       </head>
@@ -68,30 +71,7 @@ include ('master.php');
 <div class="left">
 
 </div>
-<!-- <?php
-$sql1= "SELECT U_ID,USERNAME,EMAILID,USER_ROLE FROM users,roles where users.USER_ID = roles.USER_ID";
-$retval=mysql_query($sql1,$conn); ?>
-<form method = "post" action = "<?php $_PHP_SELF ?>">
-<table>
-<tr> <th>ID</th> <th>USERNAME</th> <th>EMAIL ID</th><th>ROLE</th><th>SELECT</th> </tr>
-<?php 
-  while($row = mysql_fetch_array($retval )) {
-    
- $u_id= $row['U_ID'];
-  $u_user=$row['USERNAME'];
-   $u_mail=$row['EMAILID'];
-   $u_role=$row['USER_ROLE']; ?>
-   <tr>
-     <?php echo '<td>' . $u_id . '</td>';
-    echo '<td>' . $u_user . '</td>';
-    echo '<td>' . $u_mail . '</td>';
-    echo '<td>' . $u_role . '</td>';
-    echo '<td><input type="Checkbox" name="checkbox" value="'.$u_id.'"></input></td>';
-   ?>
-   </tr>
-   <?php } ?>
-  <input type="submit" name="delete" value="DELETE"></input>
-  </form> -->
+
 
 <?php
 $sql1= "SELECT U_ID,USERNAME,EMAILID,USER_ROLE FROM users,roles where users.USER_ID = roles.USER_ID";
@@ -118,9 +98,10 @@ $retval=mysql_query($sql1,$conn);
   } 
     
   echo "</table>";
-  echo '<a href="new_role.php"><input type="submit" id="add" name="add" value="ADD NEW ROLE"></input></a>';
+  
 echo '<input type="submit" id="del" name="delete" value="delete"></input>';
 echo '</form>';
+echo '<a href="new_role.php"><button name="add" id="add">ADD NEW ROLE</button></a>';
 
 $checkbox = $_POST['checkbox'];
 if(isset($_POST['delete']))

@@ -14,6 +14,12 @@ $dbhost = 'localhost';
    $dbpass = 'inno';
    $conn = mysql_connect($dbhost, $dbuser, $dbpass);
 mysql_select_db('db_event');
+session_start();
+$admin_name=$_SESSION['user']; 
+$role_id=$_SESSION['role_id'];
+
+   if($role_id==1)       //show content only if the logged in user is content manager      
+   {  echo "WELCOME $admin_name";
    ?>
 
 <div class="role">
@@ -45,7 +51,7 @@ if(!empty($tax))
     mysql_query($sql12,$conn);
     
 
-}
+   }
 
 echo "<br>ID OF LATEST ADDED ROLE=". $y ."<br>";
 
@@ -55,14 +61,22 @@ echo "<br>you have to add event type number:".$num;
 
   <input type="submit" id="signup" name="add2" value="ADD EVENT"></input>
   </form>
+  </div>
 
   <?php
   if(isset($_POST['add2']))
   {
   header("Location: http://localhost/php_project/new_taxonomy.php#");
 
-  }?>
+  }
+  }
+  //if logged in user isn't admin
+  else
+{
+  echo "SORRY YOU ARE NOT ALLOWED TO VISIT THIS PAGE";
+}
+  ?>
 	
-</div>
+
 </body>
 </html>

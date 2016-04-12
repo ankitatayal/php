@@ -47,6 +47,11 @@ include ('master.php');
 
 </div>
 <div class="div2">
+<?php
+$content_name=$_SESSION['user']; 
+$role_id=$_SESSION['role_id'];
+    echo "WELCOME $content_name $role_id";
+    ?>
 		<center><p style="color: white; font-size: 18px; margin: 0;"><b><?php echo"A COLLECTION OF AMAZING IDEAS READY TO SERVE YOU";?></b></p></center>
 	<center><p style="color: white; font-size: 12px;"><?php echo"asdhsfjkfjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj";?></p></center>
 </div>

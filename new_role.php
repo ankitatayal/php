@@ -15,7 +15,7 @@ $dbhost = 'localhost';
    $conn = mysql_connect($dbhost, $dbuser, $dbpass);
 mysql_select_db('db_event');
    ?>
-
+ 
 <div class="role">
  <form  method = "post" action = "new_role.php">
   <input type="text" class="user1" id="user_id" name="role" placeholder="ROLE NAME"></input>

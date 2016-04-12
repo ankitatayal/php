@@ -1,54 +1,122 @@
-<form name="login_form" method = "post" action = "<?php $_PHP_SELF ?>">
-  <input type="text" class="user1" id="user_id" name="var" placeholder="Username"></input>
-  <input type="email" class="user1" id="email_id" name="var1" placeholder="EMAIL ID" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" ></input>
-  <input type="password" class="user1" id="p1" name="var2" placeholder="Password"></input>
-  <select name="var3">
-  <option value="admin">ADMIN</option>
-    <option value="content_manager">CONTENT MANAGER</option>
-    <option value="user">OTHERS</option>
-  </select>
-  <input type="submit" id="signup" name="login1" value="LOGIN"></input>
-  </form>
+<html>
+<head>
+  <title></title>
+  <style>
+  body{margin: 0;
+  background-color: #1bbc9b;}
+
+      .left{ position: fixed;
+        width: 20%;
+        height: 100%;
+        background-color: #353b47;
+        display: inline-block;
+        float: left;
+        top: 12.5%;
+      }
+      table{
+        border-collapse: collapse;
+        width: 60%;
+        border:1px solid #ddd;
+        display: inline-block;
+        
+      }
+      th,td{
+        width: 30%;
+        text-align: left;
+        padding: 8px;
+        border:1px solid #ddd;
+        text-align: justify;
+      }
+      th{
+        background-color: #353b47;
+        color: white;
+      }
+      tr{background-color: #ebf1ef;}
+      tr:nth-child(odd){background-color: #f17c72;}
+
+
+      form{
+        width: 35%;
+        height: 10px;
+        margin-top: 200px;
+        position: relative;
+        display: inline-block;
+        margin-left: 30%;
+        margin-top: 0;
+      }
+      #del{ cursor: pointer;
+      color: #52789a;
+      /*background: linear-gradient(to bottom, #eaf4f8, #e3f0f5, #dbecf3, #d5e9f1, #cde5ef) ;*/
+      background-color: #353b47;
+      border: 1px solid #23a78c;
+      width:30%;
+      height: 38px;
+      box-shadow: none;
+        margin-top: 5%;
+       outline:none;
+       border-radius: 6px;
+       color: white;
+       float: right;
+    }
+    #add{
+      margin-top: 50%;
+    }
+
+      </style>
+      </head>
+      <body>
+        <?php
+include ('master.php');
+?>
+
+<div class="left">
+
+</div>
+
 
 <?php
-$dbhost = 'localhost';
-   $dbuser = 'root';
-   $dbpass = 'inno';
-   $conn = mysql_connect($dbhost, $dbuser, $dbpass);
-mysql_select_db('db_event');
-   ?>
+$sql1= "SELECT U_ID,USERNAME,EMAILID,USER_ROLE FROM users,roles where users.USER_ID = roles.USER_ID";
+$retval=mysql_query($sql1,$conn);
+?>
+ <form method = "post" action ="role.php">
+  <table>
+ <tr> <th>ID</th> <th>USERNAME</th> <th>EMAIL ID</th><th>ROLE</th><th>SELECT</th> </tr>
 
+ <?php
+  while($row = mysql_fetch_array($retval )) {
+    
+ $u_id= $row['U_ID'];
+  $u_user=$row['USERNAME'];
+   $u_mail=$row['EMAILID'];
+   $u_role=$row['USER_ROLE'];
+    
+    echo "<tr>";
+    echo '<td>' . $u_id . '</td>';
+    echo '<td>' . $u_user . '</td>';
+    echo '<td>' . $u_mail . '</td>';
+    echo '<td>' . $u_role . '</td>';
+    echo '<td><input type="Checkbox" name="checkbox" value="'.$u_id.'"></input></td>';
+    echo "</tr>"; 
+  } 
+  ?>
+    
+ </table>
+  
+<input type="submit" id="del" name="delete" value="delete"></input>
+</form>
+<a href="new_role.php"><button name="add" id="add">ADD NEW ROLE</button></a>
 <?php
-
-       $username = $_POST['var'];
-       $emailid = $_POST['var1'];
-        $password = $_POST['var2'];
-        $user_type = $_POST['var3'];print_r($_POST);
-
-     
-
-if(!empty($username)&& !empty($password)&& !empty($emailid))
-{
-  $sql2= 'SELECT * FROM users';
-
-  $z = mysql_query($sql2, $conn);
-  if(!$z)
-    echo "<br>connection ";
-  while($row = mysql_fetch_array($z))
-  { $a_user=$row['USERNAME'];
-   $a_pass=$row['PASS'];
-   $a_mail=$row['EMAILID'];
-    echo "$a_user";
-  if ($username == $a_user && $password == $a_pass && $emailid == $a_mail)
-               {
-                  
-                  echo"admin";
-               }
+$checkbox = $_POST['checkbox'];
+if(isset($_POST['delete']))
+  {
+  $sql4 = "DELETE FROM users WHERE U_ID=".$checkbox;
+  mysql_query($sql4);
+  header("Location: http://localhost/php_project/role.php#");
 
   }
-
-
-
-}
 ?>
+
+      </body>
+
+      </html>
 

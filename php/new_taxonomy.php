@@ -9,15 +9,11 @@
 </head>
 <body>
   <?php
-$dbhost = 'localhost';
-   $dbuser = 'root';
-   $dbpass = 'inno';
-   $conn = mysql_connect($dbhost, $dbuser, $dbpass);
-mysql_select_db('db_event');
+include ('db_con.php');
 session_start();
 $admin_name=$_SESSION['user']; 
 $role_id=$_SESSION['role_id'];
-
+//$role_id=1;
    if($role_id==1)       //show content only if the logged in user is content manager      
    {  echo "WELCOME $admin_name";
    ?>
@@ -66,14 +62,14 @@ echo "<br>you have to add event type number:".$num;
   <?php
   if(isset($_POST['add2']))
   {
-  header("Location: http://localhost/php_project/new_taxonomy.php#");
+  header("Location: http://localhost/php_project/php/taxonomy.php");
 
   }
   }
   //if logged in user isn't admin
   else
 {
-  echo "SORRY YOU ARE NOT ALLOWED TO VISIT THIS PAGE";
+  echo "YOU ARE NOT ALLOWED TO ACCESS THIS PAGE";
 }
   ?>
 	

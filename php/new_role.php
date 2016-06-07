@@ -1,26 +1,23 @@
 
-  
-
-  
 <html>
 <head>
 	<title></title>
 
 </head>
 <body>
-  <?php
-$dbhost = 'localhost';
-   $dbuser = 'root';
-   $dbpass = 'inno';
-   $conn = mysql_connect($dbhost, $dbuser, $dbpass);
-mysql_select_db('db_event');
-   ?>
- 
+  <?php                  //to add new user roles
+include ('db_con.php');
+$content_name=$_SESSION['user']; 
+$role_id=$_SESSION['role_id'];
+//$role_id=1;
+   
+ if($role_id==1)
+ {?>
 <div class="role">
  <form  method = "post" action = "new_role.php">
   <input type="text" class="user1" id="user_id" name="role" placeholder="ROLE NAME"></input>
   <?php
-    $sql11= "SELECT USER_ID,USER_ROLE FROM roles";
+    $sql11= "SELECT USER_ID,USER_ROLE FROM roles";  
  
 $retval=mysql_query($sql11,$conn);
 $role = $_POST['role'];
@@ -60,9 +57,15 @@ echo "<br>you have to add role number:".$num;
   <?php
   if(isset($_POST['add1']))
   {
-  header("Location: http://localhost/php_project/new_role.php#");
+  header("Location: http://localhost/php_project/php/role.php");
 
-  }?>
+  }
+  }
+  //if logged in user isn't admin
+else
+{
+  echo "YOU ARE NOT ALLOWED TO ACCESS THIS PAGE";
+}?>
 	
 </div>
 </body>

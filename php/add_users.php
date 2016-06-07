@@ -82,8 +82,11 @@ border-radius: 6px;
 </head>
 <body>
 <?php
-include ('master.php');
-
+include ('db_con.php');
+$content_name=$_SESSION['user']; 
+$role_id=$_SESSION['role_id'];
+if($role_id == 1)
+{
 ?>
 
 <div class="left">
@@ -149,6 +152,11 @@ while($row = mysql_fetch_array($r)) {
              echo"<p>thank you for registering</p>";
           }
    }
+ }
+ else 
+ {
+  echo "YOU ARE NOT ALLOWED TO ACCESS THIS PAGE";
+ }
 
   ?>
 

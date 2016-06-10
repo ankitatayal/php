@@ -15,8 +15,8 @@ $sql11= "SELECT EV_ID,EV_NAME FROM taxonomy";
 $sql6= "SELECT USERNAME,U_ID from users";
 $content_name=$_SESSION['user']; 
 $role_id=$_SESSION['role_id'];
-
-   if($role_id==2 || $role_id==1)       //show content only if the logged in user is content manager      
+$role_id=1;
+   if($role_id==2 || $role_id==1)       //show content only if the logged in user is content manager or admin  
 	   {  echo "WELCOME $content_name";
 	   	?>
 	  <form method="post" action="<?php $_PHP_SELF ?>" enctype="multipart/form-data">
@@ -27,7 +27,7 @@ $role_id=$_SESSION['role_id'];
 	    <?php
 	    //dropdown for event type
 	    $retval=mysql_query($sql11,$conn);
-	    echo '<br><select name="drpdown">';
+	    echo '<br>event type:&nbsp &nbsp<select name="drpdown">';
 	while($row = mysql_fetch_array($retval )) {
 	    
 	    $ev_name=$row['EV_NAME'];
@@ -39,19 +39,20 @@ $role_id=$_SESSION['role_id'];
 	    echo '</select><br>';
 	    //dropdown for user reference
 	      $y=mysql_query($sql6,$conn);
-	    echo '<br><select name="drpdown1">';
-	while($row3 = mysql_fetch_array($y )) {
+	    echo '<br>referred by the user:&nbsp&nbsp<select name="drpdown1">';
+	    while($row3 = mysql_fetch_array($y )) 
+	    {
 	    
-	    $u_name=$row3['USERNAME'];
-	    $u_id=$row3['U_ID'];
+	      $u_name=$row3['USERNAME'];
+	      $u_id=$row3['U_ID'];
 	  
-	   echo '<option value="'.$u_id.'"> '.$u_name.' </option>';
+	      echo '<option value="'.$u_id.'"> '.$u_name.' </option>';
 	    }
-	    echo '</select><br>';
+	    echo '</select><br>choose an image for the event&nbsp&nbsp';
 
 
 	    ?>
-
+        
 		<input type="file" name="image">
 		<input type="Submit" name="sub" value="submit"></input>
 	  </form>
@@ -65,7 +66,7 @@ $role_id=$_SESSION['role_id'];
 	//This is the directory where images will be saved
 	//print_r( $_FILES['image']['name']);
 	//print_r(basename( $_FILES['image']['name']));
-	$target = "imgs";
+	$target = "../imgs";
 	$target = $target .'/'. basename( $_FILES['image']['name']);
 	//echo "<br>$target";
 
@@ -107,14 +108,14 @@ $role_id=$_SESSION['role_id'];
 	while($rows=mysql_fetch_assoc($imageresult1))
 	{
 	    $image3 = $rows['img'];
-	    echo "<img src='imgs/$image3' width='100px' height='100px' >";
+	    echo "<img src='../imgs/$image3' width='100px' height='100px' >";
 	    echo "<br>";
 	} 
 }
-//if logged in user isn't content manager
+//if logged in user isn't content manager or admin
 else
 {
-	echo "SORRY YOU ARE NOT ALLOWED TO VISIT THIS PAGE";
+	echo "SORRY YOU ARE NOT ALLOWED TO ACCESS THIS PAGE";
 }
 
 ?>

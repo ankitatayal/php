@@ -4,6 +4,7 @@
 	<title>
 		
 	</title>
+	<link rel="stylesheet" type="text/css" href="css/edit.css">
 </head>
 <body>
   <?php
@@ -12,21 +13,29 @@ $sql11= "SELECT EV_ID,EV_NAME FROM taxonomy";
 $sql6= "SELECT USERNAME,U_ID from users";
 $content_name=$_SESSION['user']; 
 $role_id=$_SESSION['role_id'];
-//$role_id=1;
+$role_id=1;
    if($role_id==2 || $role_id==1)       //show content only if the logged in user is content manager      
-	   {  
-	   	echo "WELCOME $content_name";
+	   {  include('menu.php');
+	   	// echo "WELCOME $content_name";
 
 	   	?>
-	  <form method="post" action="<?php $_PHP_SELF ?>" enctype="multipart/form-data">
-	  <p> ENTER EVENT'S NAME</p>
-	    <input type="text" name="name1"></input>
-	    <p> ENTER EVENT'S DESCRIPTION</p>
-		<textarea rows="10" cols="50" name="description1"></textarea>
+	   	<div class="div_role">
+  <center><p class="roles">ADD EVENT</p></center>
+
+</div>
+<center>
+	  <form method="post" action="<?php $_PHP_SELF ?>" enctype="multipart/form-data" id="ev_form">
+	  <label class="lab">Event Name:</label><br>
+	    <input type="text" name="name1" class="user1"></input><hr>
+	    <label class="lab">Event Description:</label><br>
+		<textarea rows="10" cols="50" name="description1" class="user1"></textarea>
+		<hr>
+		<label>Select Event Type:</label>
+		<select name="drpdown" class="drop drp_role">
 	    <?php
 	    //dropdown for event type
 	    $retval=mysql_query($sql11,$conn);
-	    echo '<br><select name="drpdown">';
+
 	while($row = mysql_fetch_array($retval )) {
 	    
 	    $ev_name=$row['EV_NAME'];
@@ -36,9 +45,12 @@ $role_id=$_SESSION['role_id'];
 	  
 	    }
 	    echo '</select><br>';
-	    //dropdown for user reference
-	      $y=mysql_query($sql6,$conn);
-	    echo '<br><select name="drpdown1">';
+	    ?>
+	    
+	      <label>Select User Reference:</label>
+	    <select name="drpdown1" class="drop_u drp_role">
+	    <?php                        //dropdown for user reference
+	    $y=mysql_query($sql6,$conn);
 	while($row3 = mysql_fetch_array($y )) {
 	    
 	    $u_name=$row3['USERNAME'];
@@ -51,17 +63,19 @@ $role_id=$_SESSION['role_id'];
 
         
 	    ?>
-
-		<input type="file" name="image">
-		<input type="Submit" name="sub" value="submit"></input>
+        <label>Choose Image of Event:</label>
+		<input type="file" name="image" class="img">
+		<br>
+		<input type="Submit" name="sub" id= "edit" class="add_ev" value="ADD EVENT"></input>
 
 	  </form>
+	  </center>
       <?php
 
 	//This is the directory where images will be saved
 	//print_r( $_FILES['image']['name']);
 	//print_r(basename( $_FILES['image']['name']));
-	$target = "../imgs";
+	$target = "imgs";
 	$target = $target .'/'. basename( $_FILES['image']['name']);
 	//echo "<br>$target";
 
@@ -98,7 +112,7 @@ $role_id=$_SESSION['role_id'];
 	       
 	echo "you have uploaded the image<br>";
 
-    header("Location: http://localhost/php_project/php/ev_display.php");
+    header("Location: http://events.com/ev_display.php");
            }
     
 }

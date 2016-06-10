@@ -1,9 +1,5 @@
 <?php
-  $dbhost = 'localhost';
-   $dbuser = 'root';
-   $dbpass = 'inno';
-   $conn = mysql_connect($dbhost, $dbuser, $dbpass);
-mysql_select_db('db_event');
+include('db_con.php');
 $role_id=$_SESSION['role_id'];
    $content_name=$_SESSION['user']; 
    //$role_id=1;
@@ -12,7 +8,7 @@ $role_id=$_SESSION['role_id'];
 $con_id=$_GET['value'];
 $sql4 = "DELETE FROM event WHERE con_id= '$con_id' ";
   mysql_query($sql4);
-  header("Location: http://localhost/php_project/php/ev_display.php");
+  header("Location: http://events.com/ev_display.php");
   }
 //if logged in user isn't content manager or admin
 else

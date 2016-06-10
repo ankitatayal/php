@@ -2,25 +2,35 @@
 <html>
 <head>
 	<title></title>
+  <link rel="stylesheet" type="text/css" href="css/edit.css">
 </head>
 <body>
    <?php
 include ('db_con.php');
 $content_name=$_SESSION['user']; 
 $role_id=$_SESSION['role_id'];
-//$role_id=1;
+
 if($role_id==1)
 {
+  include('menu.php');
 
 ?>
-<form name="signup_form" method = "post" action = "<?php $_PHP_SELF ?>">
-  <input type="text" class="user1" id="user_id" name="username1" placeholder="Username"></input>
-  <input type="email" class="user1" id="email_id" name="emailid1" placeholder="Email ID" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" ></input>
-  <input type="password" class="user1" id="pass" name="password1" placeholder="Password"></input>
+<div class="div_role">
+  <center><p class="roles">ADD USER</p></center>
+</div>
+<center>
+<form name="signup_form" method = "post" action = "<?php $_PHP_SELF ?>" id="user">
+
+  <input type="text" class="user1" name="username1" autofocus placeholder="Username"></input><hr>
+  <input type="email" class="user1"  name="emailid1" placeholder="Email Id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" ></input><hr>
+  <input type="password" class="user1" name="password1" placeholder="Password"></input>
+  <hr>
+  <br>
+      <label>Role:</label>
    <?php
    $sql7= "SELECT USER_ID,USER_ROLE FROM roles WHERE USER_ID != 1";
     $r=mysql_query($sql7,$conn);
-    echo '<br><select name="s1">';
+    echo '<select name="s1" class="drp_role">';
 while($row = mysql_fetch_array($r)) 
    {
     
@@ -31,10 +41,11 @@ while($row = mysql_fetch_array($r))
     }
     echo '</select>';
     ?>
-  <input type="submit" id="signup" name="signup" value="ADD USER"></input>
+    <br>
+  <input type="submit" name="signup" id="edit" value="ADD USER"></input>
   </form>
 
-  
+  </center>
 <?php
         
         $username1 = $_POST['username1'];
@@ -61,7 +72,7 @@ while($row = mysql_fetch_array($r))
              if($z)
              {
              echo "<p>USER HAS BEEN ADDED</p>";
-             header("Location: http://localhost/php_project/php/user_list.php");
+             header("Location: http://events.com/user_list.php");
            }
           }
           

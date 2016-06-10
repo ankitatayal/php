@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title></title>
+  <link rel="stylesheet" type="text/css" href="css/edit.css">
 </head>
 <body>
    <?php
@@ -12,20 +13,27 @@
     $sql12 = "SELECT USER_ID, USER_ROLE FROM roles WHERE USER_ID != 1";
     $content_name=$_SESSION['user']; 
     $role_id=$_SESSION['role_id'];
-    //$role_id=1;
+    $role_id=1;
     if($role_id == 1)
-    {
+    {  include('menu.php');
        $ret=mysql_query($sql11,$conn);
 	   $row5=mysql_fetch_array($ret); 
 	    ?>
-	  <form method="post" action=" <?php $_PHP_SELF ?> "> 
-	  <p> ENTER USER INFORMATION</p>
-	    <input type="text" name="name" value="<?php echo $row5['USERNAME']; ?>"></input>
-	    <input type="text" name="mail" value="<?php echo $row5['EMAILID']; ?>"></input>
+      <div class="div_role">
+  <center><p class="roles">EDIT USER INFORMATION</p></center>
+</div>
+      <center>
+	  <form method="post" action=" <?php $_PHP_SELF ?> " id="user"> 
+    <label class="lab">Username:</label><br>
+	    <input type="text" class="user1" value="<?php echo $row5['USERNAME']; ?>"></input><hr>
+      <label class="lab">Email Id:</label><br>
+	    <input type="text" class="user1" value="<?php echo $row5['EMAILID']; ?>"></input><hr>
+      <br>
+      <label>Role:</label>
+      <select name="drpdown" class="drp_role">
 	    <?php
 	    //dropdown for roles
 	    $retval = mysql_query($sql12,$conn);
-	    echo '<br><select name="drpdown">';
 	while($row = mysql_fetch_array($retval )) {
 	    
 	    $r_name=$row['USER_ROLE'];
@@ -36,8 +44,10 @@
 	    }
 	    echo "</select>";
 	    ?>
-	    <input type = "Submit" name="edit" value="EDIT"></input>
+      <br>
+	    <input type = "Submit" name="edit" id="edit" value="EDIT"></input>
     </form>
+    </center>
     <?php 
           $name = $_POST['name'];
           $mail = $_POST['mail'];
@@ -48,9 +58,13 @@
           $sql20="UPDATE users SET USERNAME='$name' , EMAILID = '$mail' , USER_ID = $drpdown WHERE U_ID = $u_id";
     mysql_query($sql20,$conn);
 
-   header("Location: http://localhost/php_project/php/user_list.php");
+   header("Location: http://events.com/user_list.php");
           }
     }
+    else
+{
+  echo "YOU ARE NOT ALLOWED TO ACCESS THIS PAGE";
+}
     ?>
 
 </body>

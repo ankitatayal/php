@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title></title>
+		<link rel="stylesheet" type="text/css" href="css/edit.css">
 </head>
 <body>
   <?php
@@ -13,22 +14,31 @@ $content_name=$_SESSION['user'];
 $role_id=$_SESSION['role_id'];
 //$role_id=1;
 $con_id=$_GET['value'];
-   if($role_id==2 || $role_id==1)       //show content only if the logged in user is content manager      
-	   {  echo "WELCOME $content_name";
+   if($role_id==2 || $role_id==1)       //show content only if the logged in user is content manager  
+
+	   {  include('menu.php');
+
+	    // echo "WELCOME $content_name";
 	   $sql15= "SELECT con_name, description, img from event where con_id='$con_id'";
 	   $ret=mysql_query($sql15,$conn);
 	   $row5=mysql_fetch_array($ret);
 	   $img1=$row5['img'];
 	   	?>
-	  <form method="post" action="<?php $_PHP_SELF ?>" enctype="multipart/form-data">
-	  <p> ENTER EVENT'S NAME</p>
-	    <input type="text" name="name1" value="<?php echo $row5['con_name'];?>"></input>
-	    <p> ENTER EVENT'S DESCRIPTION</p>
-		<textarea rows="10" cols="50" name="description1"><?php echo $row5['description'];?></textarea>
+	   	<div class="div_role">
+  <center><p class="roles">ADD EVENT</p></center>
+
+</div>
+<center>
+	  <form method="post" action="<?php $_PHP_SELF ?>" enctype="multipart/form-data" id="ev_form">
+	  <label class="lab">Event Name:</label><br>
+	    <input type="text" name="name1" class="user1" value="<?php echo $row5['con_name'];?>"></input><hr>
+	    <label class="lab">Event Description:</label><br>
+		<textarea rows="10" cols="50" class="user1" name="description1"><?php echo $row5['description'];?></textarea><hr>
+		<label>Select Event Type:</label>
 	    <?php
 	    //dropdown for event type
 	    $retval=mysql_query($sql11,$conn);
-	    echo '<br><select name="drpdown">';
+	    echo '<select name="drpdown" class="drop drp_role">';
 	while($row = mysql_fetch_array($retval )) {
 	    
 	    $ev_name=$row['EV_NAME'];
@@ -38,9 +48,12 @@ $con_id=$_GET['value'];
 	  
 	    }
 	    echo '</select><br>';
+	    ?>
+	    <label>Select User Reference:</label>
+	    <?php
 	    //dropdown for user reference
 	      $y=mysql_query($sql6,$conn);
-	    echo '<br><select name="drpdown1">';
+	    echo '<select name="drpdown1" class="drop_u drp_role">';
 	while($row3 = mysql_fetch_array($y )) {
 	    
 	    $u_name=$row3['USERNAME'];
@@ -50,18 +63,19 @@ $con_id=$_GET['value'];
 	    }
 	    echo '</select><br>';
 
-        echo "image:&nbsp&nbsp <img src='../imgs/$img1' width='100px' height='100px' ><br>";
+        echo "<label class='lab'>Event Image:</label> <img  class='ev_img' src='imgs/$img1' width='100px' height='100px' ><br>";
 	    ?>
-
-		<input type="file" name="image">
-		<input type="Submit" name="sub" value="submit"></input>
+         <label>Choose Image of Event:</label>
+		<input type="file" name="image" class="img">
+		<input type="Submit" name="sub" id= "edit" class="add_ev" value="EDIT EVENT"></input>
 	  </form>
+	  </center>
       <?php
 
 	//This is the directory where images will be saved
 	//print_r( $_FILES['image']['name']);
 	//print_r(basename( $_FILES['image']['name']));
-	$target = "../imgs";
+	$target = "/imgs";
 	$target = $target .'/'. basename( $_FILES['image']['name']);
 	//echo "<br>$target";
 
@@ -100,7 +114,7 @@ $con_id=$_GET['value'];
 	              }
 	       
 	echo "you have uploaded the image<br>";
-    header("Location: http://localhost/php_project/php/ev_details.php?value=$con_id");
+    header("Location: http://events.com/ev_details.php?value=$con_id");
            }
  
 }

@@ -1,0 +1,51 @@
+.menu
+{
+	background-color: #43C5FF;
+	width: 100%;
+	top:0;
+	/*border-bottom: 2px solid #babdbf;*/
+	position: fixed;
+	background-color: rgba(0,0,0,0.5);
+	padding-bottom: 7px;
+    
+}
+ul
+{
+	list-style-type: none;
+	overflow: hidden;
+	box-sizing: border-box;
+/*	margin-top: 10px;
+	margin-bottom: 10px;*/
+	margin: 1% 0 0 20%;
+	display: inline-block;
+}
+li
+{
+	float: left;
+	margin-left: 4px;
+
+}
+li a
+{
+	color: white;
+	text-decoration: none;
+	font-size: 16px;
+	text-align: center;
+    padding: 10px 6px;
+	display: inline-block;
+	background-color: rgba(97,92,88,0.3);	
+}
+li a:hover
+{
+	color: black;
+	background-color: rgba(255,255,255,0.5);
+	background-color: white;
+}
+.site_name
+{
+	font-size: 30px;
+	color: white;
+	display: inline-block;
+	margin: 0 0 0 10%;
+	padding: 0;
+}

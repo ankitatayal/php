@@ -1,0 +1,104 @@
+body
+{
+    margin: 0;
+}
+
+.background
+{
+	top: 0;
+	padding: 10% 4%;
+	background: url(../image/lights4.jpg);
+    background-size: cover;
+
+}
+   .login_form, .signup_form
+{
+        background-color: rgba(0,0,0,0.7);
+        width: 20%;
+        display: inline-block;
+        border-radius: 3px;
+        position: relative;
+        left: 60%;
+}
+
+
+
+
+.user1
+{
+    width: 87%;
+        height: 37px;
+        font-size: 15px;
+        border:none;
+        margin-top: 7%;
+        outline: none;
+        color: white;
+        background-color: rgba(97,92,88,0.3);
+        border-radius: 3px;
+        margin-left: 6%;
+
+}
+.username
+{
+	margin-top: 3%;
+}
+.signup_label
+{
+	color: white;
+	margin-top: 8%;
+	font-size: 16px;
+	display: inline-block;
+}
+#edit
+{
+    width: 87%;
+    margin: 8% 0 7% 6%;
+    background-color: #0EBBE5;
+/*    background-color: #FEC300;*/
+    border: none;
+    color: white;
+    height: 37px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.discover
+{
+    position: absolute;
+    top: 68%;
+    right: 45%;
+/*    width: 10%;
+    height: 40px;*/
+    color: white;
+    background-color: transparent;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+	border: 2px solid white;
+	display: inline-block;
+	padding: 8px 6px;
+}
+.discover:hover
+{
+	background-color: rgba(0,0,0,0.5);
+}
+.register
+{
+	color: white;
+	left: 60%;
+	position: relative;
+	display: inline-block;
+	text-decoration: underline;
+	cursor: pointer;
+}
+.register:hover
+{
+	text-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+
+.signup_form
+{
+	display: none;
+}

@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title></title>
-  <link rel="stylesheet" type="text/css" href="css/edit.css">
+  <link rel="stylesheet" type="text/css" href="css/common_forms.css">
 </head>
 <body>
    <?php
@@ -10,25 +10,22 @@ include ('db_con.php');
 $content_name=$_SESSION['user']; 
 $role_id=$_SESSION['role_id'];
 
-if($role_id==1)
-{
-  include('menu.php');
+if ($role_id == 1) {
+  include('navigation.php');
 
 ?>
-<div class="div_role">
-  <center><p class="roles">ADD USER</p></center>
-</div>
-<center>
-<form name="signup_form" method = "post" action = "<?php $_PHP_SELF ?>" id="user">
 
-  <input type="text" class="user1" name="username1" autofocus placeholder="Username"></input><hr>
-  <input type="email" class="user1"  name="emailid1" placeholder="Email Id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" ></input><hr>
-  <input type="password" class="user1" name="password1" placeholder="Password"></input>
-  <hr>
-  <br>
-      <label>Role:</label>
+<div class="container">
+<form name="signup_form" method = "post" action = "<?php $_PHP_SELF ?>" class="user">
+<div class="inpt"><input type="text" class="user1" name="username1" autofocus placeholder="Username"></input></div>
+  <div class="inpt"><input type="email" class="user1"  name="emailid1" placeholder="Email Id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" ></input></div>
+  
+  <div class="inpt"><input type="password" class="user1" name="password1" placeholder="Password"></input></div>
+  
+  <div class="inpt">
+      <label class="lab_role">Role:</label>
    <?php
-   $sql7= "SELECT USER_ID,USER_ROLE FROM roles WHERE USER_ID != 1";
+   $sql7 = "SELECT USER_ID,USER_ROLE FROM roles WHERE USER_ID != 1";
     $r=mysql_query($sql7,$conn);
     echo '<select name="s1" class="drp_role">';
 while($row = mysql_fetch_array($r)) 
@@ -41,11 +38,12 @@ while($row = mysql_fetch_array($r))
     }
     echo '</select>';
     ?>
-    <br>
-  <input type="submit" name="signup" id="edit" value="ADD USER"></input>
+    </div>
+    <div class="inpt"><input type="submit" name="signup" id="edit" value="ADD USER"></input></div>
+  
   </form>
+  </div>
 
-  </center>
 <?php
         
         $username1 = $_POST['username1'];
@@ -65,15 +63,15 @@ while($row = mysql_fetch_array($r))
           }
           else
           {
-            $sql8= "INSERT INTO users(USERNAME,EMAILID,PASS,PASSWORD,USER_ID)VALUES('$username1','$mail1','$pass','$password',$drpdown)";
+            $sql8 = "INSERT INTO users(USERNAME,EMAILID,PASS,PASSWORD,USER_ID)VALUES('$username1','$mail1','$pass','$password',$drpdown)";
          
              $z = mysql_query($sql8, $conn);
             
-             if($z)
+             if ($z)
              {
              echo "<p>USER HAS BEEN ADDED</p>";
              header("Location: http://events.com/user_list.php");
-           }
+             }
           }
           
    }

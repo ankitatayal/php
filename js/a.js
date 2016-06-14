@@ -5,11 +5,22 @@ $(document).ready(function(){
         });
  
     });
+
+
     $(document).ready(function(){
     $(".grid").click(function(){
         $(".tabular").hide("fast");
         	$(".container").show();
         	});
 });
+
+        $(document).ready(function(){
+    $(".register").click(function(){
+        $(".login_form, .register").hide();
+            $(".signup_form").show();
+            });
+});
+
+
 
 

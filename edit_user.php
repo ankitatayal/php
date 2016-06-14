@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title></title>
-  <link rel="stylesheet" type="text/css" href="css/edit.css">
+  <link rel="stylesheet" type="text/css" href="css/common_forms.css">
 </head>
 <body>
    <?php
@@ -15,21 +15,22 @@
     $role_id=$_SESSION['role_id'];
     $role_id=1;
     if($role_id == 1)
-    {  include('menu.php');
+    {  include('navigation.php');
        $ret=mysql_query($sql11,$conn);
 	   $row5=mysql_fetch_array($ret); 
 	    ?>
-      <div class="div_role">
-  <center><p class="roles">EDIT USER INFORMATION</p></center>
-</div>
-      <center>
-	  <form method="post" action=" <?php $_PHP_SELF ?> " id="user"> 
-    <label class="lab">Username:</label><br>
-	    <input type="text" class="user1" value="<?php echo $row5['USERNAME']; ?>"></input><hr>
+<div class="container">
+	  <form method="post" action=" <?php $_PHP_SELF ?> " class="user"> 
+    <div class="inpt">
+    <label class="lab">Username:</label><br>  
+	    <input type="text" class="user_edit" value="<?php echo $row5['USERNAME']; ?>"></input>
+      </div>
+      <div class="inpt">
       <label class="lab">Email Id:</label><br>
-	    <input type="text" class="user1" value="<?php echo $row5['EMAILID']; ?>"></input><hr>
-      <br>
-      <label>Role:</label>
+	    <input type="text" class="user_edit" value="<?php echo $row5['EMAILID']; ?>"></input>
+      </div>
+      <div class="inpt">
+      <label class="lab_role">Role:</label>
       <select name="drpdown" class="drp_role">
 	    <?php
 	    //dropdown for roles
@@ -44,8 +45,9 @@
 	    }
 	    echo "</select>";
 	    ?>
-      <br>
-	    <input type = "Submit" name="edit" id="edit" value="EDIT"></input>
+      </div>
+      <div class="inpt">
+	    <input type = "Submit" name="edit" id="edit" value="EDIT USER"></input></div>
     </form>
     </center>
     <?php 

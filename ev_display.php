@@ -9,7 +9,7 @@
 
   
    include ('db_con.php');
-   session_start();
+   // session_start();
    $role_id=$_SESSION['role_id'];
    $content_name=$_SESSION['user'];
 

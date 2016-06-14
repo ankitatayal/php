@@ -53,9 +53,7 @@ li a
 	font-size: 20px;
 	text-align: center;
 	padding: 19px 20px;
-	display: inline-block;
-	
-	
+	display: inline-block;	
 }
 li a:hover , .dropdown:hover .dropbtn, .current
 {

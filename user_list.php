@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title></title>
-   <link rel="stylesheet" type="text/css" href="css/role.css">
+   <link rel="stylesheet" type="text/css" href="css/tables.css">
 
 </head>
 <body>
@@ -19,7 +19,7 @@ $id=$_SESSION['u_id'];
 
   if($role_id==1)
  {
-  include('menu.php');
+  include('navigation.php');
 $check = $_POST['checkbox'];
 if(isset($_POST['delete']))
   {
@@ -34,36 +34,25 @@ if(isset($_POST['delete']))
   }
 
 ?>
-<div class="div_role">
-  <center><p class="roles">LIST OF USERS</p></center>
-</div>
+
 
   <?php
    $sql1= "SELECT U_ID,USERNAME,EMAILID,USER_ROLE FROM users LEFT OUTER JOIN roles ON users.USER_ID = roles.USER_ID";
    $retval=mysql_query($sql1,$conn);
    ?>
-   <center>
-     <div class="del_add">
-<p style="display: inline-block;">Click on ADD USER if you want to add a new user</p>
-       <?php echo '<a href="add_user.php"><button name="add" id="add">ADD USER</button></a>'; ?>
+<div class="outer">
+     <div class="add">
+       <a href="add_user.php"><button name="add" class="add_btn">ADD NEW USER</button></a>
        </div>
-  </center>
+<div class="outer_box">
    <form method = "post" action ="user_list.php">
-<center>
-  <div class="del_add" style="margin-top: 2%">
-    <p style="display: inline-block;">Select the taxonomy terms you want to delete and then press DELETE button.</p>
-    <?php    echo '<input type="submit" id="del" name="delete" value="DELETE"></input>';  ?>
 
-
+  <div class="delete">
+    <input type="submit" class="del_btn" name="delete" value="DELETE USER"></input>
   </div>
-  </center>
 
-    <div class="view">
-    <div class="tab">TABLE VIEW</div>
-  <div class="grid">GRID VIEW</div>
-  </div>
   
-<center><div class="tabular">
+<div class="tabular">
   <table>
    <tr> <th>ID</th> <th>USERNAME</th> <th>EMAIL ID</th><th>ROLE</th><th>EDIT</th> <th>DELETE</th> 
 <?php
@@ -92,7 +81,7 @@ if(isset($_POST['delete']))
 
 echo '</form>';
 
-  echo "</div></center>";
+  echo "</div></div>";
 
   }
 

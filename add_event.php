@@ -4,34 +4,34 @@
 	<title>
 		
 	</title>
-	<link rel="stylesheet" type="text/css" href="css/edit.css">
+	<link rel="stylesheet" type="text/css" href="css/common_forms.css">
 </head>
 <body>
   <?php
 include ('db_con.php');
 $sql11= "SELECT EV_ID,EV_NAME FROM taxonomy";
 $sql6= "SELECT USERNAME,U_ID from users";
-$content_name=$_SESSION['user']; 
-$role_id=$_SESSION['role_id'];
-$role_id=1;
-   if($role_id==2 || $role_id==1)       //show content only if the logged in user is content manager      
-	   {  include('menu.php');
+$content_name = $_SESSION['user']; 
+$role_id = $_SESSION['role_id'];
+$role_id = 1;
+   if($role_id == 2 || $role_id == 1)       //show content only if the logged in user is content manager      
+	   {  include('navigation.php');
 	   	// echo "WELCOME $content_name";
 
 	   	?>
-	   	<div class="div_role">
-  <center><p class="roles">ADD EVENT</p></center>
 
-</div>
-<center>
-	  <form method="post" action="<?php $_PHP_SELF ?>" enctype="multipart/form-data" id="ev_form">
-	  <label class="lab">Event Name:</label><br>
-	    <input type="text" name="name1" class="user1"></input><hr>
-	    <label class="lab">Event Description:</label><br>
-		<textarea rows="10" cols="50" name="description1" class="user1"></textarea>
-		<hr>
-		<label>Select Event Type:</label>
-		<select name="drpdown" class="drop drp_role">
+<div class="container">
+	  <form method="post" action="<?php $_PHP_SELF ?>" enctype="multipart/form-data" class="ev_form">
+	  <div class="inpt">
+	    <input type="text" name="name1" class="user1" placeholder="Event Name"></input></div>
+	    <div class="inpt">
+		<textarea rows="10" cols="50" name="description1" class="textarea" placeholder="Event Description"></textarea>
+		</div>
+		<div class="inpt_drop">
+		<div class="label">
+		<label class="lab_role">Event Type:</label></div>
+		<div class="data">
+		<select name="drpdown" class="drop_ev">
 	    <?php
 	    //dropdown for event type
 	    $retval=mysql_query($sql11,$conn);
@@ -44,11 +44,14 @@ $role_id=1;
 	   echo '<option value="'.$ev_id.'"> '.$ev_name.' </option>';
 	  
 	    }
-	    echo '</select><br>';
-	    ?>
-	    
-	      <label>Select User Reference:</label>
-	    <select name="drpdown1" class="drop_u drp_role">
+	    echo '</select>';
+	    ?></div>
+	    </div>
+	    <div class="inpt_drop">
+	    <div class="label">
+	      <label class="lab_role">Referred By User:</label> </div>
+	      <div class="data">
+	    <select name="drpdown1" class="drop_ev">
 	    <?php                        //dropdown for user reference
 	    $y=mysql_query($sql6,$conn);
 	while($row3 = mysql_fetch_array($y )) {
@@ -58,18 +61,23 @@ $role_id=1;
 	  
 	   echo '<option value="'.$u_id.'"> '.$u_name.' </option>';
 	    }
-	    echo '</select><br>';
+	    echo '</select>';
 
 
         
-	    ?>
-        <label>Choose Image of Event:</label>
-		<input type="file" name="image" class="img">
-		<br>
+	    ?></div>
+	    </div>
+	    <div class="inpt_drop">
+	    <div class="label">
+        <label class="lab_role">Event Image:</label></div>
+        <div class="data">
+		<input type="file" name="image" class="img"></div>
+		</div>
+		<div class="inpt">
 		<input type="Submit" name="sub" id= "edit" class="add_ev" value="ADD EVENT"></input>
-
+ 		</div>
 	  </form>
-	  </center>
+	  </div>
       <?php
 
 	//This is the directory where images will be saved

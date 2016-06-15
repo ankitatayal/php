@@ -1,7 +1,7 @@
 <html>
 <head>
   <title></title>
-  <link rel="stylesheet" type="text/css" href="css/role.css">
+  <link rel="stylesheet" type="text/css" href="css/tables.css">
      <script src="js/jquery.min.js"></script>
 <script src="js/jquery-1.12.1.js"></script>
 <script src="js/a.js"></script>
@@ -11,16 +11,14 @@
   include ('db_con.php');
 $content_name=$_SESSION['user']; 
 $role_id=$_SESSION['role_id'];
-$role_id = 1;
+
    
  if($role_id==1)
  {
 
-  include('menu.php');
+  include('navigation.php');
   ?>
-  <div class="div_role">
-  <center><p class="roles">ROLES</p></center>
-</div>
+
   <?php
 $check = $_POST['checkbox'];
 if(isset($_POST['delete']))
@@ -46,28 +44,24 @@ if(isset($_POST['delete']))
    // echo "<table>";
    // echo "<tr> <th>ROLE ID</th> <th>ROLE NAME</th> </tr>";
    ?>
-
-   <?php
-   echo '<form method = "post" action ="role.php">';
-    
-  ?>
-  <center>
-  <div class="del_add">
-    <p style="display: inline-block;">Select the roles you want to delete and then press DELETE button.</p>
-    <?php    echo '<input type="submit" id="del" name="delete" value="DELETE"></input>';  ?>
-    <br>
-    <p>Enter a role name if you want to add a new role</p>
-    <?php echo '<input type="text" id="new" name="new"></input>';
-      echo '<input type="submit" id="add" name="add_role" value="ADD"></input>'; ?>
+<div class="outer">
+<form method = "post" action ="role.php">
+  <div class="add">
+    <input type="text" class="new" name="new" placeholder="Enter Role Name"></input>
+    <input type="submit" class="add_btn" name="add_role" value="ADD NEW ROLE"></input>
   </div>
-  </center>
-  <center>
-  <div class="view">
+
+    <div class="view">
     <div class="tab">TABLE VIEW</div>
   <div class="grid">GRID VIEW</div>
   </div>
-  
-   <div class="container">
+  <div class="outer_box">
+  <div class="delete">
+    
+   <input type="submit" class="del_btn" name="delete" value="DELETE ROLES"></input>
+    
+  </div>
+     <div class="container">
   <?php
  
    while($row = mysql_fetch_array($retval )) 
@@ -93,12 +87,11 @@ if(isset($_POST['delete']))
 }
 ?>
 </div>
-</center>
-
-<center><div class="tabular">
+<div class="tabular">
+  
 <?php 
   echo "<table>";
-    echo "<tr> <th>ROLE ID</th> <th>ROLE NAME</th> <th>EDIT</th> <th>DELETE</th> </tr>";  
+    echo "<tr> <th>ROLE ID</th> <th>ROLE NAME</th> <th>EDIT</th> <th>SELECT</th> </tr>";  
       $retval=mysql_query($sql1,$conn);
       while($row = mysql_fetch_array($retval )) 
    { 
@@ -111,17 +104,23 @@ if(isset($_POST['delete']))
     echo "<tr>";
     echo '<td>' . $user_id . '</td>';
     echo '<td><br><a href="user_details.php?value='.$user_id.'">'.$u_role.'</a></td>';
-    echo '<td> <a href="edit_role.php?value='.$user_id. '">Edit This Role</a> </td>';
+    echo '<td> <a href="edit_role.php?value='.$user_id. '">Edit This</a> </td>';
     echo '<td><input type="Checkbox" name="checkbox[]" value="'.$user_id.'"></input></td>';
     echo "</tr>"; 
   } 
     
     echo "</table>";
 
-   echo "</div></center>";
+   echo "</div></div></form></div>";
 
-echo '</form>';
-// '<a href="new_role.php"><button name="add" id="add">ADD NEW ROLE</button></a>';
+
+
+
+
+  
+   
+
+
    if(isset($_POST['add_role']))
   { $new = $_POST['new'];
     $sql12= "INSERT INTO roles(USER_ROLE) VALUES('$new')";

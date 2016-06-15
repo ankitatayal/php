@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title></title>
-    <link rel="stylesheet" type="text/css" href="css/edit.css">
+    <link rel="stylesheet" type="text/css" href="css/common_forms.css">
 </head>
 <body>
   <?php
@@ -16,21 +16,25 @@
     $role_id=1;
     if($role_id == 1)
     {  
-      include('menu.php');
+      include('navigation.php');
        $ret=mysql_query($sql11,$conn);
 	   $row5=mysql_fetch_array($ret); 
 	    ?>
-      <div class="div_role">
-  <center><p class="roles">EDIT ROLE NAME</p></center>
-</div>
-<center>
-	  <form method="post" action=" <?php $_PHP_SELF ?> " id="user"> 
-<label class="lab">Role Name:</label><br>
-	    <input type="text" class="user1" name="name1" value="<?php echo $row5['USER_ROLE']; ?>"></input>
-      <hr><br>
+     
+     <div class="container">
+ 
+	  <form method="post" action=" <?php $_PHP_SELF ?> " class="user"> 
+<div class="inpt">
+<label class="lab">Enter Role:</label>
+
+	    <input type="text" class="user_edit" name="name1" value="<?php echo $row5['USER_ROLE']; ?>"></input>
+ </div>   
+<div class="inpt">
+
 	    <input type = "Submit" name="btn" id="edit" value="EDIT ROLE"></input>
+      </div>
     </form>
-    </center>
+    </div>
     <?php 
           $name1 = $_POST['name1'];
           if(isset($_POST['btn']) && !empty($name1))

@@ -16,13 +16,13 @@ include ('db_con.php');
 
 if(!empty($username)&& !empty($password)&& !empty($emailid))
 {
-  $sql2= "SELECT USERNAME,USER_ID,U_ID FROM users where USERNAME='$username' AND PASSWORD='$password' AND EMAILID='$emailid'";     
+  $sql2= "SELECT USERNAME,USER_ID,U_ID FROM users where USERNAME='$username' AND PASSWORD = '$password' AND EMAILID = '$emailid'";     
 }
   $p = mysql_query($sql2, $conn);
-  $row4=mysql_fetch_array($p);
-  $role_id=$row4['USER_ID'];
-  $u_name=$row4['USERNAME'];
-  $u_id=$row4['U_ID'];
+  $row4 = mysql_fetch_array($p);
+  $role_id = $row4['USER_ID'];
+  $u_name = $row4['USERNAME'];
+  $u_id = $row4['U_ID'];
   $_SESSION['role_id'] = $role_id;
   $_SESSION['u_id'] = $u_id;
   $_SESSION['user'] = $u_name;

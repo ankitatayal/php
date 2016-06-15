@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title></title>
-  <link rel="stylesheet" type="text/css" href="css/role.css">
+  <link rel="stylesheet" type="text/css" href="css/tables.css">
 </head>
 <body>
   <?php
@@ -13,7 +13,7 @@
    $role_id=$_SESSION['role_id'];
    $content_name=$_SESSION['user'];
 
-    include('menu.php');
+    include('navigation.php');
 
    // $user=isset($_POST['user']) ? $_POST['user'] : NULL;
    // $evs=isset($_POST['evs']) ? $_POST['evs'] : NULL;
@@ -21,15 +21,22 @@
     $evs=$_POST['evs'];
      
    ?>
-   <div class="div_role">
-  <center><p class="roles">OUR EVENTS</p></center>
+   <div class="add_event">
+       <a href="add_event.php"><button name="add" class="add_btn">ADD NEW EVENT</button></a>
+       </div>
+   <div class="outer_tab">
+   <?php 
+   if ($role_id == 1 || $role_id == 2) {
+   ?>
 
-</div>
-   
+          <?php
+           }
+            ?>
+   <div class="add">
    <form method="post" action="<?php $_PHP_SELF ?>">
-   <center>
-   <label>Select Event Type:</label>
-   <select name="evs" class="drp_role">                  
+<div class="filter">
+   <label>Event Type:</label>
+   <select name="evs" class="drp_ev">                  
   <?php
   $sql5= "SELECT EV_NAME,EV_ID from taxonomy";
 
@@ -48,8 +55,10 @@ while($row1 = mysql_fetch_array($z))
   }  ?>
 
   </select>
-  <label style="margin-left: 5%">Select User Reference:</label>
-    <select name="user" class="drp_role">
+  </div>
+  <div class="filter">
+  <label>Referred By User:</label>
+    <select name="user" class="drp_ev">
 <?php 
 
  $sql6= "SELECT USERNAME,U_ID from users";           //filter for user reference
@@ -71,10 +80,11 @@ while($row2 = mysql_fetch_array($y))
   }
 ?>
   </select>
-  <input type="submit" name="sub1" id = "add" value="submit">
-  </center>
-</form>
+  </div>
+  <div class="filter"><input type="submit" name="sub1" class="add_btn" value="FILTER YOUR SEARCH"></div>
   
+</form>
+ </div> 
 <?php
    
     if(isset($_POST['sub1']))
@@ -106,9 +116,12 @@ while($row2 = mysql_fetch_array($y))
  
 $imageresult1 = mysql_query($sqlimage);
 ?>
-<center><div class="ev_tabular">
-<table class="ev_table">
-<tr> <th>ID</th> <th>EVENT NAME</th> <th>ADDED BY</th> <th>EVENT TYPE</th> <th>REFERRED BY</th> <th>DESCRIPTION</th> <th>IMAGE</th>
+<div class="outer_box">
+<div class="tabular">
+<table>
+<tr> <?php if ($role_id == 1 || $role_id == 2) {  ?>
+<th>ID</th>    <?php }   ?>
+<th>EVENT NAME</th> <th>ADDED BY</th> <th>EVENT TYPE</th> <th>REFERRED BY</th> <th>DESCRIPTION</th> <th>IMAGE</th>
   <?php
 
   if 
@@ -128,7 +141,8 @@ $imageresult1 = mysql_query($sqlimage);
    $username=$rows['USERNAME'];
    $description = substr($description, 0, 120); 
     echo "<tr>";
-    echo '<td>' . $con_id . '</td>';
+    if ($role_id == 1 || $role_id == 2) {
+      echo '<td>' . $con_id . '</td>'; }
     echo '<td>' . $con_name . '</td>';
     echo '<td>' . $brief . '</td>';
     echo '<td>' . $ev_name . '</td>';
@@ -137,7 +151,7 @@ $imageresult1 = mysql_query($sqlimage);
     echo "<td><img src='imgs/$image3' width='100px' height='100px' ></td>";
     if ($role_id == 1) //admin can edit/delete any event
     {
-    echo '<td><a href="edit_event.php?value='.$con_id.'">Edit</a></td>';  //sending the id of selected event
+    echo '<td><a href="edit_event.php?value='.$con_id.'">Edit This</a></td>';  //sending the id of selected event
     echo '<td><a href="delete_event.php?value='.$con_id.'">Delete</a></td>';
     }
     if($role_id == 2 && $brief == $content_name)   //content manager can add/delete only those vents which were added by him
@@ -151,8 +165,9 @@ $imageresult1 = mysql_query($sqlimage);
   echo "</table>";
 
 ?>
-</div></center>
-
+    </div>
+  </div>
+</div>
 </body>
 </html>
 
